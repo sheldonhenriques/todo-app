@@ -4,9 +4,7 @@
     "plugins": [
       "@typescript-eslint"
     ],
-    "extends": [
-      "plugin:shopify/esnext"
-    ],
+    "extends": [],
     "rules": {
       "no-console": 1
     }
