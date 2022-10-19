@@ -1,22 +1,22 @@
 <html>
     <head>
-        <title>TODO List</title>
+        <title>List</title>
         <script
           src="https://code.jquery.com/jquery-3.3.1.min.js"
           integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
           crossorigin="anonymous"></script>
         <link href="/assests/styles.css" rel="stylesheet" type="text/css" />
-        <script src="/assests/list.js"></script>
+        <script src="/assests/todo-list.js"></script>
     </head>
     <body>
-        <div id="todo-table">
+        <div id="list-table">
             <form>
-                <input type="text" class="inputClass" name="item" placeholder="Add new item..." required />
-                <button type="submit">Add Item</button>
+                <input type="text" class="inputClass" name="name" placeholder="Add new list..." required />
+                <button type="submit">Add List</button>
             </form>
             <ul>
-                <% for(var i = 0; i < todos.length; i++) { %>
-                <li id=<%=todos[i]._id%> class='list-class'><%= todos[i].item %></li>
+                <% for(var i = 0; i < lists.length; i++) { %>
+                <li id=<%=lists[i]._id%> class='list-class'><%= lists[i].item %></li>
                 <% } %>
             </ul>
         </div>

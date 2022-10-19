@@ -1,7 +1,14 @@
 require('dotenv').config()
 import express from 'express'
 import  todoController from '../controllers/todoController'
+import  personController from '../controllers/personController'
+import  indexController from '../controllers/indexController'
+import  listController from '../controllers/listController'
+import  authenticateController from '../controllers/authenticateController'
 import { routes } from '../util/constants'
+import {verifyToken} from '../middleware/auth'
+import cookieParser from 'cookie-parser'
+
 
 // const urlencodedParser = bodyParser.json();
 
@@ -14,12 +21,30 @@ app.use(express.static('./public'))
 
 app.use(express.json());       // to support JSON-encoded bodies
 app.use(express.urlencoded());
+app.use(cookieParser(process.env.COOKIE_SCERET));
 
-app.get(routes.todo, todoController.getListItems)
+app.get(routes.index,indexController.index)
+
+app.get(routes.todo, verifyToken, todoController.getListItems)
 
 app.post(routes.todo, todoController.addListItem)
 
 app.delete(routes.todoId, todoController.deleteListItem)
+
+// User routes
+app.post(routes.signUp, personController.userSignUp)
+
+app.post(routes.login, authenticateController.login)
+
+app.get(routes.profileId, personController.getUserProfile)
+
+app.put(routes.profileId, personController.editUserProfile)
+
+app.delete(routes.profileId, personController.deleteUserProfile)
+
+// List routes
+app.get(routes.listWithUserId, verifyToken, listController.getList)
+
 
 app.listen(port, () => {
    // eslint-disable-next-line no-console
