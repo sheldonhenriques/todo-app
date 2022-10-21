@@ -2,19 +2,18 @@ import { Request, Response} from 'express';
 import Todo from './../models/todolistModel'
 
 const getListItems = (req: Request, res: Response): void =>{
-    Todo.find({}, (err, data) => {
+    Todo.find({listid: req.params.id}, (err, data) => {
         if(err) {
             return res.json({
                 message: err.message
             })
         }
-        res.render('todo', {todos: data})
+        res.render('todo', {data: {todos: data, listid: req.params.id}})
     })
 }
 
 const addListItem = (req: Request, res: Response): void =>{
     const newTodo = new Todo(req.body)
-    newTodo.listid = '1' //update with list Id
     newTodo.save((err, data) => {
         if(err) {
             return res.json({

@@ -2,12 +2,17 @@ $(document).ready(function(){
 
     $('form').on('submit', function(){
   
-        var item = $('form input');
-        var todo = {item: item.val()};
+        const item = $('form input').map(function(idx, elem) {
+            return $(elem).val()
+        }).get();
+        const todoData = {
+            item: item[0],
+            listid:  item[1],
+        };
         $.ajax({
-          type: 'POST',
+          type: 'POST', 
           url: '/todo',
-          data: todo,
+          data: todoData,
           success: function(data){
             //do something with the data via front-end framework
             location.reload();
@@ -19,7 +24,6 @@ $(document).ready(function(){
     })
   
     $('li').on('click', function(){
-        var item = $(this).text().replace(/ /g, "-");
         var id = $(this).attr('id');
         $.ajax({
           type: 'DELETE',

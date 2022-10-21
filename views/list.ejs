@@ -6,17 +6,20 @@
           integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
           crossorigin="anonymous"></script>
         <link href="/assests/styles.css" rel="stylesheet" type="text/css" />
-        <script src="/assests/todo-list.js"></script>
+        <script src="/assests/list.js"></script>
     </head>
     <body>
         <div id="list-table">
             <form>
                 <input type="text" class="inputClass" name="name" placeholder="Add new list..." required />
+                <input type="text" class="inputClass" name="tags" placeholder="Add tag" required />
+                <input type="hidden" name="userid" value=<%= data.userid %>>
                 <button type="submit">Add List</button>
             </form>
+            <br>
             <ul>
-                <% for(var i = 0; i < lists.length; i++) { %>
-                <li id=<%=lists[i]._id%> class='list-class'><%= lists[i].item %></li>
+                <% for(var i = 0; i < data.lists.length; i++) { %>
+                <li id=<%=data.lists[i]._id%> class='list-plain'><%= data.lists[i].name %><span id=<%=data.lists[i]._id%> class="close" >&times;</span></li>
                 <% } %>
             </ul>
         </div>

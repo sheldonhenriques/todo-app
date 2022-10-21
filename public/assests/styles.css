@@ -20,7 +20,33 @@ body{
     clear: both;
 }
 
+#list-table{
+    position: relative;
+    width: 95%;
+    background: #090d13;
+    margin: 0 auto;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+#list-table form:after{
+    margin: 0;
+    content: '';
+    display: block;
+    clear: both;
+}
+
 input[type="text"].inputClass{
+    width: 33%;
+    padding: 20px;
+    background:#181c22;
+    border: 0;
+    float: left;
+    font-size: 20px;
+    color: #989898;
+}
+
+input[type="text"].inputTodoClass{
     width: 70%;
     padding: 20px;
     background:#181c22;
@@ -62,6 +88,32 @@ li.list-class:hover {
     text-decoration: line-through;
     background: rgba(0,0,0,0.2);
 }
+
+.close {
+  cursor: pointer;
+  position: absolute;
+  right: 0%;
+  padding: 20px;
+  transform: translate(0%, -28%);
+  color:#1ab188;
+}
+
+.close:hover {background: rgba(0,0,0,0.2);}
+
+
+li.list-plain {
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+    font-family: arial;
+    font-size: 20px;
+    cursor: pointer;
+    letter-spacing: 1px;
+}
+
+li.list-plain:hover {
+    background-color: rgba(0,0,0,0.2);
+  }
 
 *, *:before, *:after {
     box-sizing: border-box;

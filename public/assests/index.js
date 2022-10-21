@@ -17,10 +17,10 @@ $('.tab a').on('click', function (e) {
 
   $('#signupform').on('submit', function(){
   
-        var item = $('form input').map(function(idx, elem) {
+        const item = $('form input').map(function(idx, elem) {
             return $(elem).val()
         }).get();
-        var todo = {
+        const signupData = {
             fullName: item[0],
             email:  item[1],
             password: item[2],
@@ -28,7 +28,7 @@ $('.tab a').on('click', function (e) {
         $.ajax({
         type: 'POST',
         url: '/signup',
-        data: todo,
+        data: signupData,
         success: function(data){
             //do something with the data via front-end framework
             if(data._id){
@@ -43,17 +43,17 @@ $('.tab a').on('click', function (e) {
 
     $('#loginform').on('submit', function(){
   
-        var item = $('form input').map(function(idx, elem) {
+        const item = $('form input').map(function(idx, elem) {
             return $(elem).val()
         }).get();
-        var todo = {
+        const loginData = {
             email:  item[3],
             password: item[4],
         };
         $.ajax({
         type: 'POST',
         url: '/login',
-        data: todo,
+        data: loginData,
         success: function(data){
             //do something with the data via front-end framework
             if(data._id){

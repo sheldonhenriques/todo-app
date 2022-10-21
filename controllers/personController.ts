@@ -1,14 +1,32 @@
-import { Request, Response} from 'express';
+import { Request, Response} from 'express'
+import bcrypt from 'bcrypt'
+import jwt from 'jsonwebtoken'
 import Person from './../models/personModel'
 
-const userSignUp = (req: Request, res: Response): void =>{
+const userSignUp = async (req: Request, res: Response): Promise<void> =>{
     // save the new user in mongodb
-    new Person(req.body).save(function(err, data){
+    const body = req.body
+    body.password = await bcrypt.hash(req.body.password, 10)
+    new Person(body).save(function(err, data){
         if(err) {
             res.json({
                 message: err.message
             })
         }
+        const token = jwt.sign(
+            { user_id: data._id, email: data.email },
+            process.env.TOKEN_KEY,
+            {
+            expiresIn: "5h",
+            }
+        );
+        let options = {
+            maxAge: 1000 * 60 * 300, // would expire after 5 hours
+            httpOnly: true, // The cookie only accessible by the web server
+            secure: true,
+            signed: true // Indicates if the cookie should be signed
+        }
+        res.cookie('token', token, options)
         res.json(data)
     })
 }
