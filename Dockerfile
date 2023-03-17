@@ -1,14 +1,22 @@
-FROM alpine
+FROM node:12
 
-RUN apk update
-RUN apk add nodejs
-RUN apk add npm
+# Working dir
+WORKDIR /usr/src/app
 
-RUN mkdir /root/app/
-WORKDIR /root/app/
-COPY * /root/app/
+# Copy files from Build
+COPY package*.json ./
 
-RUN npm install
+# Install Files
+RUN npm install 
+
+# Copy SRC
+COPY . .
+
+# Build
+RUN npm run build
+
+# Open Port
 EXPOSE 3000
 
-CMD npm start
+# Docker Command to Start Service
+CMD [ "npm", "run", "start:dev" ]
