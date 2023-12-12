@@ -19,7 +19,7 @@ app.set("view engine", "ejs");
 app.use(express.static("./public"));
 
 app.use(express.json()); // to support JSON-encoded bodies
-app.use(express.urlencoded());
+app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser(process.env.COOKIE_SCERET));
 
 app.get(routes.index, userLoggedIn, indexController.index);
